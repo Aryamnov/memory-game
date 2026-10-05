@@ -32,10 +32,52 @@ textarea {
   padding: 24px 16px;
 }
 
-.game__title {
-  margin: 0 0 24px;
-  text-align: center;
+.gameHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.gameTitle {
+  margin: 0;
   font-size: clamp(24px, 5vw, 36px);
+}
+
+.gameActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.button {
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #345784;
+  border-radius: 6px;
+  background-color: #345784;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.buttonSecondary {
+  border-color: #c5d4ed;
+  background-color: #e8f0fc;
+  color: #345784;
+}
+
+.gameStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-bottom: 16px;
+}
+
+.gameStat {
+  margin: 0;
 }
 
 .board {
@@ -47,7 +89,7 @@ textarea {
   list-style: none;
 }
 
-.board__item {
+.boardItem {
   min-width: 0;
 }
 
@@ -62,17 +104,26 @@ textarea {
   cursor: pointer;
 }
 
-.card:focus-visible {
+.card:focus-visible,
+.button:focus-visible {
   outline: 3px solid #416bbf;
   outline-offset: 2px;
 }
 
-.card__back {
+.cardBack {
   font-size: clamp(24px, 6vw, 56px);
   font-weight: 700;
 }
 
-.card__front {
-  overflow-wrap: anywhere;
-  font-weight: 700;
+.cardFront:not([hidden]) {
+  display: grid;
+  height: 100%;
+  place-items: center;
+}
+
+.cardImage {
+  display: block;
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
 }

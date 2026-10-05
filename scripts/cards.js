@@ -1,12 +1,12 @@
 const cardTypes = [
-  { pairId: 'html', label: 'HTML' },
-  { pairId: 'css', label: 'CSS' },
-  { pairId: 'javascript', label: 'JavaScript' },
-  { pairId: 'typescript', label: 'TypeScript' },
-  { pairId: 'python', label: 'Python' },
-  { pairId: 'node', label: 'Node.js' },
-  { pairId: 'git', label: 'Git' },
-  { pairId: 'sass', label: 'Sass' },
+  { pairId: 'html', label: 'HTML', image: './assets/images/html.svg' },
+  { pairId: 'css', label: 'CSS', image: './assets/images/css.svg' },
+  { pairId: 'javascript', label: 'JavaScript', image: './assets/images/javascript.svg' },
+  { pairId: 'typescript', label: 'TypeScript', image: './assets/images/typescript.svg' },
+  { pairId: 'python', label: 'Python', image: './assets/images/python.svg' },
+  { pairId: 'node', label: 'Node.js', image: './assets/images/node.svg' },
+  { pairId: 'git', label: 'Git', image: './assets/images/git.svg' },
+  { pairId: 'sass', label: 'Sass', image: './assets/images/sass.svg' },
 ];
 
 export function createDeck() {
