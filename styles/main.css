@@ -110,6 +110,20 @@ textarea {
   outline-offset: 2px;
 }
 
+.cardOpen {
+  background-color: #ffffff;
+  cursor: default;
+}
+
+.cardMatched {
+  border-color: #86b89a;
+  background-color: #edf8f0;
+}
+
+.boardLocked .card:not(.cardOpen) {
+  cursor: wait;
+}
+
 .cardBack {
   font-size: clamp(24px, 6vw, 56px);
   font-weight: 700;

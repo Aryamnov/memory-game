@@ -44,6 +44,26 @@ export function renderCards(board, cards) {
   board.replaceChildren(...cards.map(createCard));
 }
 
+export function updateGameView(view, state) {
+  state.cards.forEach((card, index) => {
+    const button = view.querySelector(`[data-card-id="${card.id}"]`);
+    button.querySelector('.cardBack').hidden = card.isOpen;
+    button.querySelector('.cardFront').hidden = !card.isOpen;
+    button.classList.toggle('cardOpen', card.isOpen);
+    button.classList.toggle('cardMatched', card.isMatched);
+
+    const status = card.isMatched ? 'Пара найдена.' : 'Открыта.';
+    const label = card.isOpen
+      ? `Карточка ${index + 1}. ${card.label}. ${status}`
+      : `Карточка ${index + 1}. Закрыта.`;
+    button.setAttribute('aria-label', label);
+  });
+
+  view.querySelector('[data-counter="moves"]').textContent = String(state.moves);
+  view.querySelector('[data-counter="pairs"]').textContent = String(state.matchedPairs);
+  view.querySelector('.board').classList.toggle('boardLocked', state.isLocked);
+}
+
 function createHeader() {
   const title = createElement('h1', {
     className: 'gameTitle',
