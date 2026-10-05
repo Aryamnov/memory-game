@@ -64,6 +64,73 @@ export function updateGameView(view, state) {
   view.querySelector('.board').classList.toggle('boardLocked', state.isLocked);
 }
 
+export function createVictoryContent(moves, onNewGame, resultSaved = true) {
+  const result = createElement('strong', { text: String(moves) });
+  const message = createElement('p', {
+    children: ['Все пары найдены. Ходы: ', result, '.'],
+  });
+
+  if (!resultSaved) {
+    message.append(createElement('span', {
+      className: 'saveNotice',
+      text: 'Результат не удалось сохранить.',
+    }));
+  }
+
+  const newGameButton = createElement('button', {
+    className: 'button',
+    text: 'Новая игра',
+    attributes: { type: 'button' },
+  });
+
+  newGameButton.addEventListener('click', onNewGame);
+
+  return { title: 'Победа!', content: message, actions: [newGameButton] };
+}
+
+function formatDate(timestamp) {
+  const date = new Date(timestamp);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  return `${day}.${month}.${date.getFullYear()}`;
+}
+
+export function createLeaderboardContent(results) {
+  if (results.length === 0) {
+    return {
+      title: 'Таблица лидеров',
+      content: createElement('p', { text: 'Пока нет результатов.' }),
+    };
+  }
+
+  const headingRow = createElement('tr', {
+    children: ['Место', 'Ходы', 'Дата'].map((text) => createElement('th', {
+      text,
+      attributes: { scope: 'col' },
+    })),
+  });
+
+  const tableHead = createElement('thead', { children: [headingRow] });
+  const rows = results.map((result, index) => createElement('tr', {
+    children: [
+      createElement('th', {
+        text: String(index + 1),
+        attributes: { scope: 'row' },
+      }),
+      createElement('td', { text: String(result.moves) }),
+      createElement('td', { text: formatDate(result.timestamp) }),
+    ],
+  }));
+
+  const tableBody = createElement('tbody', { children: rows });
+  const table = createElement('table', {
+    className: 'leaderboardTable',
+    children: [tableHead, tableBody],
+  });
+
+  return { title: 'Таблица лидеров', content: table };
+}
+
 function createHeader() {
   const title = createElement('h1', {
     className: 'gameTitle',
